@@ -1,6 +1,6 @@
 package com.system.Flatform.ticket.service;
 
-import com.system.Flatform.ticket.TicketCreateDTO;
+import com.system.Flatform.ticket.dto.TicketCreateDTO;
 
 public interface TicketService {
 

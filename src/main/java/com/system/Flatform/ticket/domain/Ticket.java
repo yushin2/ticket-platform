@@ -1,20 +1,26 @@
 package com.system.Flatform.ticket.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.Flatform.utils.BaseEntity;
 import com.system.Flatform.utils.enums.AgeToWatch;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 공연 티켓 도메인
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
+@DynamicUpdate
 @Entity
 @Table(name = "ticket")
 public class Ticket extends BaseEntity {
@@ -46,14 +52,26 @@ public class Ticket extends BaseEntity {
     @Column(name = "ticket_price", columnDefinition = "INT(20) COMMENT '티켓 가격'")
     private int ticketPrice;
 
+//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
+//    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "show_time", columnDefinition = "DATETIME COMMENT '공연 시작 시간'")
     private LocalTime showTime;
 
-    @Column(name = "synopsis", columnDefinition = "VARCHAR(255) COMMENT '줄거리 요약'")
-    private String synopsis;
+    @Column(name = "ticket_information", columnDefinition = "VARCHAR(255) COMMENT '공연 정보'")
+    private String ticketInformation;
+
+    @OneToMany(mappedBy = "ticket")
+    private List<TicketReply> ticketReplyList = new ArrayList<>();
+
+    public void setTicketReplyList(List<TicketReply> ticketReplyList) {
+        ticketReplyList.stream().forEach(ticketReply -> {
+            ticketReply.setTicket(this);
+        });
+    }
 
     @Builder
-    public Ticket(Long ticketId, String ticketName, String period, String address, String genre, int runningTime, AgeToWatch ageToWatch, int ticketPrice, LocalTime showTime, String synopsis) {
+    public Ticket(Long ticketId, String ticketName, String period, String address, String genre, int runningTime, AgeToWatch ageToWatch,
+                  int ticketPrice, LocalTime showTime, String ticketInformation, List<TicketReply> ticketReplyList) {
         this.ticketId = ticketId;
         this.ticketName = ticketName;
         this.period = period;
@@ -63,6 +81,7 @@ public class Ticket extends BaseEntity {
         this.ageToWatch = ageToWatch;
         this.ticketPrice = ticketPrice;
         this.showTime = showTime;
-        this.synopsis = synopsis;
+        this.ticketInformation = ticketInformation;
+        this.ticketReplyList = ticketReplyList;
     }
 }
