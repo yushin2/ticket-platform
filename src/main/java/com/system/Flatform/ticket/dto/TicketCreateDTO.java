@@ -7,6 +7,7 @@ import com.system.Flatform.utils.enums.AgeToWatch;
 import lombok.Getter;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -22,9 +23,9 @@ public class TicketCreateDTO {
     private int runningTime;
     private AgeToWatch ageToWatch;
     private int ticketPrice;
-    @DateTimeFormat(pattern = "HH:mm:ss")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss", timezone = "Asis/Seoul")
-    private String showTime;
+//    @DateTimeFormat(pattern = "HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asis/Seoul")
+    private LocalDateTime showTime;
     private String ticketInformation;
 
     public Ticket toEntity() {
@@ -36,7 +37,7 @@ public class TicketCreateDTO {
                 .runningTime(runningTime)
                 .ageToWatch(ageToWatch)
                 .ticketPrice(ticketPrice)
-                .showTime(DateTimeUtils.stringToLocalTime(showTime))
+                .showTime(showTime)
                 .ticketInformation(ticketInformation)
                 .build();
     }

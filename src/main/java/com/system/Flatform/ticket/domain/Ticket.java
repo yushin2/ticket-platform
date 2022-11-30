@@ -11,6 +11,7 @@ import org.hibernate.annotations.DynamicUpdate;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +56,7 @@ public class Ticket extends BaseEntity {
 //    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
 //    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "show_time", columnDefinition = "DATETIME COMMENT '공연 시작 시간'")
-    private LocalTime showTime;
+    private LocalDateTime showTime;
 
     @Column(name = "ticket_information", columnDefinition = "VARCHAR(255) COMMENT '공연 정보'")
     private String ticketInformation;
@@ -71,7 +72,7 @@ public class Ticket extends BaseEntity {
 
     @Builder
     public Ticket(Long ticketId, String ticketName, String period, String address, String genre, int runningTime, AgeToWatch ageToWatch,
-                  int ticketPrice, LocalTime showTime, String ticketInformation, List<TicketReply> ticketReplyList) {
+                  int ticketPrice, LocalDateTime showTime, String ticketInformation, List<TicketReply> ticketReplyList) {
         this.ticketId = ticketId;
         this.ticketName = ticketName;
         this.period = period;
