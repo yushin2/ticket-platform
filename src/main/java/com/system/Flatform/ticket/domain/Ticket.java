@@ -1,6 +1,7 @@
 package com.system.Flatform.ticket.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.system.Flatform.ticket.dto.TicketUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import com.system.Flatform.utils.enums.AgeToWatch;
 import lombok.AccessLevel;
@@ -84,5 +85,16 @@ public class Ticket extends BaseEntity {
         this.showTime = showTime;
         this.ticketInformation = ticketInformation;
         this.ticketReplyList = ticketReplyList;
+    }
+
+    public void ticketUpdate(TicketUpdateDTO ticketUpdateDTO) {
+        this.ticketName = ticketUpdateDTO.getTicketName();
+        this.period = ticketUpdateDTO.getPeriod();
+        this.address = ticketUpdateDTO.getAddress();
+        this.genre = ticketUpdateDTO.getGenre();
+        this.runningTime = ticketUpdateDTO.getRunningTime();
+        this.ageToWatch = ticketUpdateDTO.getAgeToWatch();
+        this.ticketPrice = ticketUpdateDTO.getTicketPrice();
+
     }
 }

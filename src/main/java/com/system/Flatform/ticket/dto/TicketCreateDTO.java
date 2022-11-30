@@ -23,7 +23,6 @@ public class TicketCreateDTO {
     private int runningTime;
     private AgeToWatch ageToWatch;
     private int ticketPrice;
-//    @DateTimeFormat(pattern = "HH:mm:ss")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asis/Seoul")
     private LocalDateTime showTime;
     private String ticketInformation;
