@@ -1,11 +1,14 @@
 package com.system.Flatform.ticket.service.impl;
 
 import com.system.Flatform.ticket.domain.Ticket;
-import com.system.Flatform.ticket.dto.TicketCreateDTO;
-import com.system.Flatform.ticket.dto.TicketUpdateDTO;
+import com.system.Flatform.ticket.domain.TicketReply;
+import com.system.Flatform.ticket.dto.*;
+import com.system.Flatform.ticket.repository.TicketReplyRepository;
 import com.system.Flatform.ticket.repository.TicketRepository;
 import com.system.Flatform.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -17,6 +20,7 @@ public class TicketServiceImpl implements TicketService {
 
     private final String NO_TICKET_INFO_MSG = "해당하는 공연 정보가 없습니다.";
     private final TicketRepository ticketRepository;
+    private final TicketReplyRepository ticketReplyRepository;
 
 
     /**
@@ -49,5 +53,40 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void deleteTicket(List<Long> ticketIds) {
         ticketRepository.deleteTickets(ticketIds);
+    }
+
+    /**
+     * 티켓 목록 조회
+     * @param pageable
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public Page<TicketListDTO> ticketList(Pageable pageable) {
+        return ticketRepository.ticketList(pageable);
+    }
+
+    /**
+     * 티켓 상세 조회
+     * @param ticketId
+     * @return
+     */
+    @Transactional(readOnly = true)
+    @Override
+    public TicketDetailDTO ticketDetail(Long ticketId) {
+        return ticketRepository.ticketDetail(ticketId);
+    }
+
+    /**
+     * 티켓 답글 등록(저장)
+     * @param ticketReplyCreateDTO
+     */
+    @Transactional
+    @Override
+    public void createTicketReply(TicketReplyCreateDTO ticketReplyCreateDTO) {
+        Ticket ticket = ticketRepository.findById(ticketReplyCreateDTO.getTicketId()).orElseThrow(()
+                -> new IllegalArgumentException(NO_TICKET_INFO_MSG));
+        TicketReply savedTicketReply = ticketReplyRepository.save(ticketReplyCreateDTO.toEntity(ticket));
+        savedTicketReply.setReplyParentId((ticket.getTicketReplyList().size() == 0) ? savedTicketReply.getTicketReplyId() : ticket.getTicketReplyList().get(ticket.getTicketReplyList().size()-1).getTicketReplyId());
     }
 }

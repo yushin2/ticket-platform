@@ -1,5 +1,6 @@
 package com.system.Flatform.ticket.dto;
 
+import com.system.Flatform.ticket.domain.Ticket;
 import com.system.Flatform.ticket.domain.TicketReply;
 import lombok.Getter;
 
@@ -9,11 +10,14 @@ import lombok.Getter;
 @Getter
 public class TicketReplyCreateDTO {
 
+    private Long ticketId;
     private String content;
 
-    public TicketReply toEntity() {
+    public TicketReply toEntity(Ticket ticket) {
         return TicketReply.builder()
                 .content(content)
+                .replyDepth((ticket.getTicketReplyList().size() == 0) ? 1 : 2)
+                .ticket(ticket)
                 .build();
     }
 }

@@ -37,6 +37,10 @@ public class TicketReply extends BaseEntity {
     @JoinColumn(name = "ticket_id")
     private Ticket ticket;
 
+    public void setReplyParentId(Long replyParentId) {
+        this.replyParentId = replyParentId;
+    }
+
     public void setTicket(Ticket ticket) {
         this.ticket = ticket;
         ticket.getTicketReplyList().add(this);

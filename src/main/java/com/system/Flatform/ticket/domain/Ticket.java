@@ -1,6 +1,5 @@
 package com.system.Flatform.ticket.domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.Flatform.ticket.dto.TicketUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import com.system.Flatform.utils.enums.AgeToWatch;
@@ -9,11 +8,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,8 +51,6 @@ public class Ticket extends BaseEntity {
     @Column(name = "ticket_price", columnDefinition = "INT(20) COMMENT '티켓 가격'")
     private int ticketPrice;
 
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "HH:mm:ss")
-//    @DateTimeFormat(pattern = "HH:mm:ss")
     @Column(name = "show_time", columnDefinition = "DATETIME COMMENT '공연 시작 시간'")
     private LocalDateTime showTime;
 
