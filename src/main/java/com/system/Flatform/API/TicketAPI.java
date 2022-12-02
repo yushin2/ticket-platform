@@ -7,6 +7,10 @@ import com.system.Flatform.ticket.dto.TicketReplyUpdateDTO;
 import com.system.Flatform.ticket.dto.TicketUpdateDTO;
 import com.system.Flatform.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
+import org.apache.logging.log4j.Level;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,11 +19,13 @@ import java.util.List;
 
 import static com.system.Flatform.utils.Constants.*;
 
+@Log4j2
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/ticket")
 public class TicketAPI {
 
+    final static Logger logger = LogManager.getLogger(TicketAPI.class);
     private final TicketService ticketService;
 
     /**
@@ -30,6 +36,13 @@ public class TicketAPI {
     @PostMapping
     public ResponseEntity createTicket(@RequestBody TicketCreateDTO ticketCreateDTO) {
         ticketService.createTicket(ticketCreateDTO);
+        logger.log(Level.ALL, ">>>> log test");
+        log.fatal(">>> test fatal");
+        log.error(">>> test error");
+        log.warn(">>> test warn");
+        log.info(">>> test info");
+        log.debug(">>> test debug");
+        log.trace(">>> test trace");
         return ResponseEntity.ok().body(CREATE_SUCCESS);
     }
 

@@ -118,6 +118,9 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
         return ticketDetailDTO;
     }
 
+
+    /** 이하 QueryDSL 검색 조건 관련 메소드 */
+
     BooleanExpression ticketNameContains(String ticketName) {
         if (ObjectUtils.isEmpty(ticketName)) return null;
         return ticket.ticketName.contains(ticketName);
