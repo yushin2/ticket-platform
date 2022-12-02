@@ -11,6 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -63,8 +64,8 @@ public class TicketServiceImpl implements TicketService {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<TicketListDTO> ticketList(Pageable pageable) {
-        return ticketRepository.ticketList(pageable);
+    public Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address) {
+        return ticketRepository.ticketList(pageable, ticketName, address);
     }
 
     /**

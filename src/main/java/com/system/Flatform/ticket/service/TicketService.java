@@ -15,7 +15,7 @@ public interface TicketService {
 
     void deleteTicket(List<Long> ticketIds);
 
-    Page<TicketListDTO> ticketList(Pageable pageable);
+    Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address);
 
     TicketDetailDTO ticketDetail(Long ticketId);
 

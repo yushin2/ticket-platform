@@ -1,6 +1,7 @@
 package com.system.Flatform.ticket.repository.impl;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.system.Flatform.ticket.dto.TicketDetailDTO;
 import com.system.Flatform.ticket.dto.TicketListDTO;
@@ -14,6 +15,7 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
@@ -52,7 +54,7 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<TicketListDTO> ticketList(Pageable pageable) {
+    public Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address) {
 
         List<TicketListDTO> ticketDTOS = queryFactory.select(Projections.constructor(TicketListDTO.class,
                         ticket.ticketId,
@@ -62,7 +64,9 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
                 ))
                 .from(ticket)
                 .where(ticket.useYn.eq(UseYn.Y),
-                        ticket.delYn.eq(DelYn.N))
+                        ticket.delYn.eq(DelYn.N),
+                        ticketNameContains(ticketName),
+                        addressContains(address))
                 .offset(pageable.getOffset())
                 .limit(pageable.getPageSize())
                 .fetch();
@@ -112,6 +116,16 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
         ticketDetailDTO.setTicketReplyList(replyDTOList);
 
         return ticketDetailDTO;
+    }
+
+    BooleanExpression ticketNameContains(String ticketName) {
+        if (ObjectUtils.isEmpty(ticketName)) return null;
+        return ticket.ticketName.contains(ticketName);
+    }
+
+    BooleanExpression addressContains(String address) {
+        if (ObjectUtils.isEmpty(address)) return null;
+        return ticket.address.contains(address);
     }
 
 }

@@ -61,8 +61,10 @@ public class TicketAPI {
      * @return
      */
     @GetMapping
-    public ResponseEntity ticketList(Pageable pageable) {
-        return ResponseEntity.ok().body(ticketService.ticketList(pageable));
+    public ResponseEntity ticketList(Pageable pageable,
+                                     @RequestParam(required = false, defaultValue = "") String ticketName,
+                                     @RequestParam(required = false, defaultValue = "") String address) {
+        return ResponseEntity.ok().body(ticketService.ticketList(pageable, ticketName, address));
     }
 
     /**
