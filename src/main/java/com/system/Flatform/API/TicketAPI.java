@@ -3,6 +3,7 @@ package com.system.Flatform.API;
 
 import com.system.Flatform.ticket.dto.TicketCreateDTO;
 import com.system.Flatform.ticket.dto.TicketReplyCreateDTO;
+import com.system.Flatform.ticket.dto.TicketReplyUpdateDTO;
 import com.system.Flatform.ticket.dto.TicketUpdateDTO;
 import com.system.Flatform.ticket.service.TicketService;
 import lombok.RequiredArgsConstructor;
@@ -12,16 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.system.Flatform.utils.Constants.*;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/ticket")
 public class TicketAPI {
-
-    private final String CREATE_SUCCESS = "등록 성공!";
-    private final String UPDATE_SUCCESS = "수정 성공!";
-    private final String DELETE_SUCCESS = "삭제 성공!";
-    private final String CREATE_REPLY_SUCCESS = "답글 등록 성공!";
-
 
     private final TicketService ticketService;
 
@@ -78,11 +75,36 @@ public class TicketAPI {
         return ResponseEntity.ok().body(ticketService.ticketDetail(ticketId));
     }
 
+    /**
+     * 티켓 답글 등록 API
+     * @param ticketReplyCreateDTO
+     * @return
+     */
     @PostMapping("/reply")
     public ResponseEntity createTicketReply(@RequestBody TicketReplyCreateDTO ticketReplyCreateDTO) {
         ticketService.createTicketReply(ticketReplyCreateDTO);
         return ResponseEntity.ok().body(CREATE_REPLY_SUCCESS);
     }
 
+    /**
+     * 티켓 답글 수정 API
+     * @param ticketReplyUpdateDTO
+     * @return
+     */
+    @PutMapping("/reply")
+    public ResponseEntity updateTicketReply(@RequestBody TicketReplyUpdateDTO ticketReplyUpdateDTO) {
+        ticketService.updateTicketReply(ticketReplyUpdateDTO);
+        return ResponseEntity.ok().body(UPDATE_SUCCESS);
+    }
 
+    /**
+     * 티켓 답글 삭제 API
+     * @param ticketReplyIds
+     * @return
+     */
+    @DeleteMapping("/reply/{ticketReplyIds}")
+    public ResponseEntity deleteTicketReply(@PathVariable("ticketReplyIds") List<Long> ticketReplyIds) {
+        ticketService.deleteTicketReply(ticketReplyIds);
+        return ResponseEntity.ok().body(DELETE_SUCCESS);
+    }
 }

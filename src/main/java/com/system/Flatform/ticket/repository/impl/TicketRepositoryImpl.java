@@ -1,11 +1,7 @@
 package com.system.Flatform.ticket.repository.impl;
 
-import com.querydsl.core.annotations.QueryProjection;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.system.Flatform.ticket.domain.QTicket;
-import com.system.Flatform.ticket.domain.QTicketReply;
-import com.system.Flatform.ticket.domain.Ticket;
 import com.system.Flatform.ticket.dto.TicketDetailDTO;
 import com.system.Flatform.ticket.dto.TicketListDTO;
 import com.system.Flatform.ticket.dto.TicketReplyDetailDTO;
@@ -42,8 +38,18 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
                 .set(ticket.useYn, UseYn.N)
                 .set(ticket.delYn, DelYn.Y)
                 .where(ticket.ticketId.in(ticketIds)).execute();
+
+        queryFactory.update(ticketReply) // 티켓 답글과 함께 삭제
+                .set(ticketReply.useYn, UseYn.N)
+                .set(ticketReply.delYn, DelYn.Y)
+                .where(ticketReply.ticket.ticketId.in(ticketIds)).execute();
     }
 
+    /**
+     * 티켓 목록 조회
+     * @param pageable
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public Page<TicketListDTO> ticketList(Pageable pageable) {
@@ -64,6 +70,11 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
         return new PageImpl<>(ticketDTOS, pageable, ticketDTOS.size());
     }
 
+    /**
+     * 티켓 상세 조회
+     * @param ticketId
+     * @return
+     */
     @Transactional(readOnly = true)
     @Override
     public TicketDetailDTO ticketDetail(Long ticketId) {
@@ -102,4 +113,5 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
 
         return ticketDetailDTO;
     }
+
 }

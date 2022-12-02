@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface TicketService {
 
+    /** 이하 티켓 API */
     void createTicket(TicketCreateDTO ticketCreateDTO);
 
     void updateTicket(TicketUpdateDTO ticketUpdateDTO);
@@ -18,7 +19,11 @@ public interface TicketService {
 
     TicketDetailDTO ticketDetail(Long ticketId);
 
+    /** 이하 티켓 답글 API */
     void createTicketReply(TicketReplyCreateDTO ticketReplyCreateDTO);
 
+    void updateTicketReply(TicketReplyUpdateDTO ticketReplyUpdateDTO);
+
+    void deleteTicketReply(List<Long> ticketReplyIds);
 
 }

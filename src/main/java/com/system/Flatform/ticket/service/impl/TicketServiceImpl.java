@@ -14,11 +14,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static com.system.Flatform.utils.Constants.*;
+
 @Service
 @RequiredArgsConstructor
 public class TicketServiceImpl implements TicketService {
 
-    private final String NO_TICKET_INFO_MSG = "해당하는 공연 정보가 없습니다.";
     private final TicketRepository ticketRepository;
     private final TicketReplyRepository ticketReplyRepository;
 
@@ -87,6 +88,31 @@ public class TicketServiceImpl implements TicketService {
         Ticket ticket = ticketRepository.findById(ticketReplyCreateDTO.getTicketId()).orElseThrow(()
                 -> new IllegalArgumentException(NO_TICKET_INFO_MSG));
         TicketReply savedTicketReply = ticketReplyRepository.save(ticketReplyCreateDTO.toEntity(ticket));
-        savedTicketReply.setReplyParentId((ticket.getTicketReplyList().size() == 0) ? savedTicketReply.getTicketReplyId() : ticket.getTicketReplyList().get(ticket.getTicketReplyList().size()-1).getTicketReplyId());
+        savedTicketReply.setReplyParentId((ticket.getTicketReplyList().size() == 0) ?
+                savedTicketReply.getTicketReplyId() :
+                ticket.getTicketReplyList().get(ticket.getTicketReplyList().size()-1).getTicketReplyId());
     }
+
+    /**
+     * 티켓 답글 수정
+     * @param ticketReplyUpdateDTO
+     */
+    @Transactional
+    @Override
+    public void updateTicketReply(TicketReplyUpdateDTO ticketReplyUpdateDTO) {
+        TicketReply ticketReply = ticketReplyRepository.findById(ticketReplyUpdateDTO.getTicketReplyId()).orElseThrow(()
+                -> new IllegalArgumentException(NO_TICKET_REPLY_MSG));
+        ticketReply.updateReplyContent(ticketReplyUpdateDTO);
+    }
+
+    /**
+     * 티켓 답글 삭제
+     * @param ticketReplyIds
+     */
+    @Transactional
+    @Override
+    public void deleteTicketReply(List<Long> ticketReplyIds) {
+        ticketReplyRepository.deleteTicketReply(ticketReplyIds);
+    }
+
 }

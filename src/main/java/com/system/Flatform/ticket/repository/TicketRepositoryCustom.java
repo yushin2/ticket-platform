@@ -14,4 +14,5 @@ public interface TicketRepositoryCustom {
     Page<TicketListDTO> ticketList(Pageable pageable);
 
     TicketDetailDTO ticketDetail(Long ticketId);
+
 }
