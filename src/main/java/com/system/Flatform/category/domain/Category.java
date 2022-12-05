@@ -33,6 +33,14 @@ public class Category extends BaseEntity {
     @Column(name = "category_parent_id")
     private Long categoryParentId;
 
+    public void setCategoryOrder(int categoryOrder) {
+        this.categoryOrder = categoryOrder;
+    }
+
+    public void setCategoryParentId(Long categoryParentId) {
+        this.categoryParentId = categoryParentId;
+    }
+
     @Builder
     public Category(Long categoryId, String categoryName, int categoryDepth, int categoryOrder, Long categoryParentId) {
         this.categoryId = categoryId;

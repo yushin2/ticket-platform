@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
+
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
@@ -18,8 +21,20 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void saveCategory(CategorySaveDTO categorySaveDTO) {
         Category savedCategory = categoryRepository.save(categorySaveDTO.toEntity());
-        /** 카테고리 뎁스, order 구현 어떻게 하지? */
 
+//        List<Long> twoDepthCategoryIds = categoryRepository.saveCategory(categorySaveDTO);
+//        Category category = categoryRepository.findById(twoDepthCategoryIds.size() - 1L).orElseThrow();
+//        savedCategory.setCategoryOrder(category.getCategoryOrder());
+
+        if (savedCategory.getCategoryParentId() == null) {
+            savedCategory.setCategoryParentId(savedCategory.getCategoryId());
+            savedCategory.setCategoryOrder(1);
+        }
+
+        List<Category> categoryList = categoryRepository.getCategory(categorySaveDTO.getCategoryParentId());
+        if (categoryList.size() == 1) savedCategory.setCategoryOrder(1);
+//        else if (categoryList.size() > 1)
+        /** 카테고리 order 관련 개발 진행 중 */
 
     }
 }
