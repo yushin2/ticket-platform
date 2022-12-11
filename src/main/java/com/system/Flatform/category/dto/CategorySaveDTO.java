@@ -3,6 +3,9 @@ package com.system.Flatform.category.dto;
 import com.system.Flatform.category.domain.Category;
 import lombok.Getter;
 
+/**
+ * 카테고리 저장 DTO
+ */
 @Getter
 public class CategorySaveDTO {
 

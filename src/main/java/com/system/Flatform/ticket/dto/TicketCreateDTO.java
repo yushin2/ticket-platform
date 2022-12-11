@@ -2,13 +2,10 @@ package com.system.Flatform.ticket.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.system.Flatform.ticket.domain.Ticket;
-import com.system.Flatform.utils.DateTimeUtils;
 import com.system.Flatform.utils.enums.AgeToWatch;
 import lombok.Getter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 /**
  * 공연 티켓 등록(저장) DTO
