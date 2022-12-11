@@ -39,10 +39,4 @@ public class BaseEntity {
     @Column(name = "updated_dt")
     private LocalDateTime updatedDt;
 
-    @PrePersist
-    public void prePersist() {
-        this.useYn = this.useYn == null ? UseYn.Y : null;
-        this.delYn = this.delYn == null ? DelYn.N : null;
-    }
-
 }
