@@ -5,7 +5,6 @@ import com.system.Flatform.utils.enums.DelYn;
 import com.system.Flatform.utils.enums.UseYn;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
@@ -22,13 +21,11 @@ import java.time.LocalDateTime;
 public class BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'Y'")
     @Column(name = "use_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'Y'")
     private UseYn useYn;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'N'")
-    @Column(name = "del_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'Y'")
+    @Column(name = "del_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'N'")
     private DelYn delYn;
 
     @CreatedDate
