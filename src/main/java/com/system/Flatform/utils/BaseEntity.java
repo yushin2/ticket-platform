@@ -5,7 +5,6 @@ import com.system.Flatform.utils.enums.DelYn;
 import com.system.Flatform.utils.enums.UseYn;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
