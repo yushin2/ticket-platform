@@ -22,13 +22,11 @@ import java.time.LocalDateTime;
 public class BaseEntity {
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'Y'")
     @Column(name = "use_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'Y'")
     private UseYn useYn;
 
     @Enumerated(EnumType.STRING)
-    @ColumnDefault("'N'")
-    @Column(name = "del_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'Y'")
+    @Column(name = "del_yn", insertable = false, columnDefinition = "VARCHAR(1) DEFAULT 'N'")
     private DelYn delYn;
 
     @CreatedDate
