@@ -2,13 +2,13 @@ package com.system.Flatform.category.repository.impl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.system.Flatform.category.domain.Category;
-import com.system.Flatform.category.dto.CategorySaveDTO;
 import com.system.Flatform.category.repository.CategoryRepositoryCustom;
+import com.system.Flatform.utils.enums.DelYn;
+import com.system.Flatform.utils.enums.UseYn;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 import static com.system.Flatform.category.domain.QCategory.category;
 
@@ -20,29 +20,24 @@ public class CategoryRepositoryCustomImpl implements CategoryRepositoryCustom {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Category> getCategory(Long parentCategoryId) {
-
-        List<Category> categories = queryFactory.select(category)
+    public int getCategoryParentCount() {
+        return queryFactory.select(category.count())
                 .from(category)
-                .where(category.categoryParentId.eq(parentCategoryId))
-                .fetch();
-
-        return categories;
+                .where(category.useYn.eq(UseYn.Y),
+                        category.delYn.eq(DelYn.N),
+                        category.categoryDepth.eq(1))
+                .fetchOne().intValue();
     }
 
-//    @Transactional
-//    @Override
-//    public List<Long> saveCategory(CategorySaveDTO categorySaveDTO) {
-//
-//        return queryFactory.select(category.categoryId)
-//                .from(category)
-//                .where(category.categoryDepth.eq(2),
-//                        category.categoryParentId.eq(categorySaveDTO.getCategoryId()))
-//                .fetch();
-
-//        queryFactory.update(category)
-//                .set(category.categoryOrder, twoDepthCategoryIds.size())
-//                .where(category.categoryId)
-//                .execute();
-//    }
+    @Transactional(readOnly = true)
+    @Override
+    public int getCategoryChildCount(Long categoryParentId) {
+        return queryFactory.select(category.count())
+                .from(category)
+                .where(category.useYn.eq(UseYn.Y),
+                        category.delYn.eq(DelYn.N),
+                        category.categoryDepth.eq(2),
+                        category.categoryParentId.eq(categoryParentId))
+                .fetchOne().intValue();
+    }
 }

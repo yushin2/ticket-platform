@@ -1,5 +1,6 @@
 package com.system.Flatform.category.domain;
 
+import com.system.Flatform.category.dto.CategoryUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -48,5 +49,9 @@ public class Category extends BaseEntity {
         this.categoryDepth = categoryDepth;
         this.categoryOrder = categoryOrder;
         this.categoryParentId = categoryParentId;
+    }
+
+    public void updateCategory(CategoryUpdateDTO categoryUpdateDTO) {
+        this.categoryName = categoryUpdateDTO.categoryName();
     }
 }
