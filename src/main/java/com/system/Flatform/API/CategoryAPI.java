@@ -1,14 +1,11 @@
 package com.system.Flatform.API;
 
 import com.system.Flatform.category.dto.CategorySaveDTO;
+import com.system.Flatform.category.dto.CategoryUpdateDTO;
 import com.system.Flatform.category.service.CategoryService;
-import com.system.Flatform.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static com.system.Flatform.utils.Constants.*;
 
@@ -24,4 +21,13 @@ public class CategoryAPI {
         categoryService.saveCategory(categorySaveDTO);
         return ResponseEntity.ok().body(CREATE_SUCCESS);
     }
+
+    @PutMapping
+    public ResponseEntity updateCategory(@RequestBody CategoryUpdateDTO categoryUpdateDTO) {
+        categoryService.updateCategory(categoryUpdateDTO);
+        return ResponseEntity.ok().body(UPDATE_SUCCESS);
+    }
+
+
+
 }

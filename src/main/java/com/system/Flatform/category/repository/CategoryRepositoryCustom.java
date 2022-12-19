@@ -1,11 +1,10 @@
 package com.system.Flatform.category.repository;
 
-
-import com.system.Flatform.category.domain.Category;
-
 import java.util.List;
 
 public interface CategoryRepositoryCustom {
 
-    List<Category> getCategory(Long parentCategoryId);
+    // 대분류 order 저장을 위한 대분류 count 구하기
+    int getCategoryParentCount();
+    int getCategoryChildCount(Long categoryParentId);
 }
