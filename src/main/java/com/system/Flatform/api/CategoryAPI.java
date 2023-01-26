@@ -1,8 +1,7 @@
-package com.system.Flatform.API;
+package com.system.Flatform.api;
 
 import com.system.Flatform.category.dto.CategorySaveDTO;
 import com.system.Flatform.category.service.CategoryService;
-import com.system.Flatform.utils.Constants;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
