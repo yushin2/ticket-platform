@@ -4,6 +4,7 @@ import com.system.Flatform.category.domain.Category;
 
 /**
  * 카테고리 저장 DTO
+ *
  */
 public record CategorySaveDTO(
 
