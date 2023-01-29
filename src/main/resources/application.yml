@@ -16,5 +16,5 @@ spring:
         format_sql: true
         use_sql_comments: true
 
-logging:
-  config: classpath:log4j2.xml
+  logging:
+    config: classpath:log4j2.xml

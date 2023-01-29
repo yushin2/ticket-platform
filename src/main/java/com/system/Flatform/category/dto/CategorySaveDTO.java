@@ -1,17 +1,15 @@
 package com.system.Flatform.category.dto;
 
 import com.system.Flatform.category.domain.Category;
-import lombok.Getter;
 
 /**
  * 카테고리 저장 DTO
  */
-@Getter
-public class CategorySaveDTO {
+public record CategorySaveDTO(
 
-    private Long categoryParentId;
-    private String categoryName;
-
+        Long categoryParentId,
+        String categoryName
+) {
     public Category toEntity() {
         return Category.builder()
                 .categoryName(categoryName)
