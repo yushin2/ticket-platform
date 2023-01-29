@@ -27,12 +27,12 @@ public class CategoryServiceImpl implements CategoryService {
         Category savedCategory = categoryRepository.save(categorySaveDTO.toEntity());
 
         // 대분류 카테고리 저장
-        if (categorySaveDTO.getCategoryParentId() == null) {
+        if (categorySaveDTO.categoryParentId() == null) {
             savedCategory.setCategoryParentId(savedCategory.getCategoryId());
             savedCategory.setCategoryOrder(categoryRepository.getCategoryParentCount());
         }
         else { // 중분류 카테고리 저장
-            savedCategory.setCategoryOrder(categoryRepository.getCategoryChildCount(categorySaveDTO.getCategoryParentId()));
+            savedCategory.setCategoryOrder(categoryRepository.getCategoryChildCount(categorySaveDTO.categoryParentId()));
         }
     }
 
