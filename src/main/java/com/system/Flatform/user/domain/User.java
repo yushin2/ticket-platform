@@ -11,6 +11,9 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+/**
+ * 회원 entity
+ */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @DynamicUpdate
 @Getter
@@ -28,8 +31,8 @@ public class User extends BaseEntity {
     @Column(name = "password", columnDefinition = "VARCHAR(100) COMMENT '비밀번호'")
     private String password;
 
-    @Column(name = "user_name", columnDefinition = "VARCHAR(20) COMMENT '사용자명'")
-    private String userName;
+    @Column(name = "username", columnDefinition = "VARCHAR(20) COMMENT '사용자명'")
+    private String username;
 
     @Column(name = "user_phone", columnDefinition = "VARCHAR(50) COMMENT '연락처'")
     private String userPhone;
@@ -55,12 +58,12 @@ public class User extends BaseEntity {
     private List<Role> roles;
 
     @Builder
-    public User(String userId, String userEmail, String password, String userName, String userPhone, String authToken,
+    public User(String userId, String userEmail, String password, String username, String userPhone, String authToken,
                 int authStatus, LocalDateTime expiredDt, LocalDateTime generatedDt, List<Role> roles) {
         this.userId = userId;
         this.userEmail = userEmail;
         this.password = password;
-        this.userName = userName;
+        this.username = username;
         this.userPhone = userPhone;
         this.authToken = authToken;
         this.authStatus = authStatus;
