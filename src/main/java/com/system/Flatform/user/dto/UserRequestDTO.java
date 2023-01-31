@@ -7,7 +7,6 @@ import com.system.Flatform.utils.PasswordUtil;
 import java.util.List;
 
 public record UserRequestDTO (
-        String userId,
         String userEmail,
         String password,
         String username,
@@ -15,7 +14,6 @@ public record UserRequestDTO (
 ){
     public User toEntity(List<Role> roles) {
         return User.builder()
-                .userId(userId)
                 .userEmail(userEmail)
                 .password(PasswordUtil.hashPassword(password))
                 .username(username)
