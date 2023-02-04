@@ -1,4 +1,4 @@
-package com.system.Flatform.API;
+package com.system.Flatform.api;
 
 import com.system.Flatform.category.record.CategorySaveRecord;
 import com.system.Flatform.category.record.CategoryUpdateRecord;
