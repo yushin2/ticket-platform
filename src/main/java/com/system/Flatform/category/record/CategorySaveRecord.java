@@ -1,11 +1,11 @@
-package com.system.Flatform.category.dto;
+package com.system.Flatform.category.record;
 
 import com.system.Flatform.category.domain.Category;
 
 /**
- * 카테고리 저장 DTO
+ * 카테고리 저장 record
  */
-public record CategorySaveDTO(
+public record CategorySaveRecord(
 
         Long categoryParentId,
         String categoryName

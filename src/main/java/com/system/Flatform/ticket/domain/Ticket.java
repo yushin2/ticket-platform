@@ -27,19 +27,16 @@ public class Ticket extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ticket_id")
-    private Long ticketId;
+    private Long goodsId;
 
     @Column(name = "ticket_name", columnDefinition = "VARCHAR(255) COMMENT '티켓명'")
-    private String ticketName;
+    private String goodsName;
 
     @Column(name = "period", columnDefinition = "VARCHAR(255) COMMENT '공연기간'")
-    private String period;
+    private String goodsPeriod;
 
     @Column(name = "address", columnDefinition = "VARCHAR(255) COMMENT '공연장 주소'")
-    private String address;
-
-    @Column(name = "genre", columnDefinition = "VARCHAR(50) COMMENT '장르'")
-    private String genre;
+    private String goodsAddress;
 
     @Column(name = "runningTime", columnDefinition = "INT(20) COMMENT '공연시간'")
     private int runningTime;
@@ -48,14 +45,14 @@ public class Ticket extends BaseEntity {
     @Column(name = "age_to_watch", columnDefinition = "VARCHAR(50) COMMENT '시청 연령가'")
     private AgeToWatch ageToWatch;
 
-    @Column(name = "ticket_price", columnDefinition = "INT(20) COMMENT '티켓 가격'")
-    private int ticketPrice;
-
     @Column(name = "show_time", columnDefinition = "DATETIME COMMENT '공연 시작 시간'")
-    private LocalDateTime showTime;
+    private LocalDateTime goodsDate;
 
     @Column(name = "ticket_information", columnDefinition = "VARCHAR(255) COMMENT '공연 정보'")
-    private String ticketInformation;
+    private String goodsInformation;
+
+    @Column(name = "goods_grade", columnDefinition = "FLOAT(20) COMMENT '공연 평점'")
+    private float goodsGrade;
 
     @OneToMany(mappedBy = "ticket")
     private List<TicketReply> ticketReplyList = new ArrayList<>();
@@ -66,30 +63,15 @@ public class Ticket extends BaseEntity {
         });
     }
 
-    @Builder
-    public Ticket(Long ticketId, String ticketName, String period, String address, String genre, int runningTime, AgeToWatch ageToWatch,
-                  int ticketPrice, LocalDateTime showTime, String ticketInformation, List<TicketReply> ticketReplyList) {
-        this.ticketId = ticketId;
-        this.ticketName = ticketName;
-        this.period = period;
-        this.address = address;
-        this.genre = genre;
-        this.runningTime = runningTime;
-        this.ageToWatch = ageToWatch;
-        this.ticketPrice = ticketPrice;
-        this.showTime = showTime;
-        this.ticketInformation = ticketInformation;
-        this.ticketReplyList = ticketReplyList;
-    }
 
     public void ticketUpdate(TicketUpdateDTO ticketUpdateDTO) {
-        this.ticketName = ticketUpdateDTO.getTicketName();
-        this.period = ticketUpdateDTO.getPeriod();
-        this.address = ticketUpdateDTO.getAddress();
-        this.genre = ticketUpdateDTO.getGenre();
-        this.runningTime = ticketUpdateDTO.getRunningTime();
-        this.ageToWatch = ticketUpdateDTO.getAgeToWatch();
-        this.ticketPrice = ticketUpdateDTO.getTicketPrice();
+//        this.ticketName = ticketUpdateDTO.getTicketName();
+//        this.period = ticketUpdateDTO.getPeriod();
+//        this.address = ticketUpdateDTO.getAddress();
+//        this.genre = ticketUpdateDTO.getGenre();
+//        this.runningTime = ticketUpdateDTO.getRunningTime();
+//        this.ageToWatch = ticketUpdateDTO.getAgeToWatch();
+//        this.ticketPrice = ticketUpdateDTO.getTicketPrice();
 
     }
 }

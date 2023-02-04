@@ -1,11 +1,11 @@
 package com.system.Flatform.category.service;
 
-import com.system.Flatform.category.dto.CategorySaveDTO;
-import com.system.Flatform.category.dto.CategoryUpdateDTO;
+import com.system.Flatform.category.record.CategorySaveRecord;
+import com.system.Flatform.category.record.CategoryUpdateRecord;
 
 public interface CategoryService {
 
-    void saveCategory(CategorySaveDTO categorySaveDTO);
+    void saveCategory(CategorySaveRecord categorySaveRecord);
 
-    void updateCategory(CategoryUpdateDTO categoryUpdateDTO);
+    void updateCategory(CategoryUpdateRecord categoryUpdateRecord);
 }
