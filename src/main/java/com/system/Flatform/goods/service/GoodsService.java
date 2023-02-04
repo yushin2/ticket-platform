@@ -1,12 +1,14 @@
-package com.system.Flatform.ticket.service;
+package com.system.Flatform.goods.service;
 
-import com.system.Flatform.ticket.dto.*;
+import com.system.Flatform.goods.dto.*;
+import com.system.Flatform.goods.record.GoodsCreateDTO;
+import com.system.Flatform.goods.record.GoodsUpdateDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
-public interface TicketService {
+public interface GoodsService {
 
     /** 이하 공연 API */
     void createGoods(GoodsCreateDTO goodsCreateDTO);
@@ -15,7 +17,7 @@ public interface TicketService {
 
     void deleteGoods(List<Long> ticketIds);
 
-    Page<TicketListDTO> goodsList(Pageable pageable, String ticketName, String address);
+    Page<GoodsListDTO> goodsList(Pageable pageable, String ticketName, String address);
 
     GoodsDetailDTO goodsDetail(Long ticketId);
 

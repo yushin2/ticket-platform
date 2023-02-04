@@ -1,7 +1,7 @@
-package com.system.Flatform.ticket.repository.impl;
+package com.system.Flatform.goods.repository.impl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.system.Flatform.ticket.repository.TicketReplyRepositoryCustom;
+import com.system.Flatform.goods.repository.GoodsReplyRepositoryCustom;
 import com.system.Flatform.utils.enums.DelYn;
 import com.system.Flatform.utils.enums.UseYn;
 import lombok.RequiredArgsConstructor;
@@ -10,11 +10,11 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-import static com.system.Flatform.ticket.domain.QTicketReply.ticketReply;
+import static com.system.Flatform.goods.domain.QTicketReply.ticketReply;
 
 @Repository
 @RequiredArgsConstructor
-public class TicketReplyRepositoryImpl implements TicketReplyRepositoryCustom {
+public class GoodsReplyRepositoryImpl implements GoodsReplyRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 

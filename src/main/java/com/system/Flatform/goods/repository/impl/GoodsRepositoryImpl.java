@@ -1,12 +1,12 @@
-package com.system.Flatform.ticket.repository.impl;
+package com.system.Flatform.goods.repository.impl;
 
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.system.Flatform.ticket.dto.GoodsDetailDTO;
-import com.system.Flatform.ticket.dto.TicketListDTO;
-import com.system.Flatform.ticket.dto.TicketReplyDetailDTO;
-import com.system.Flatform.ticket.repository.TicketRepositoryCustom;
+import com.system.Flatform.goods.dto.GoodsDetailDTO;
+import com.system.Flatform.goods.dto.GoodsListDTO;
+import com.system.Flatform.goods.dto.GoodsReplyDetailDTO;
+import com.system.Flatform.goods.repository.GoodsRepositoryCustom;
 import com.system.Flatform.utils.enums.DelYn;
 import com.system.Flatform.utils.enums.UseYn;
 import lombok.RequiredArgsConstructor;
@@ -19,12 +19,12 @@ import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 
-import static com.system.Flatform.ticket.domain.QTicket.ticket;
-import static com.system.Flatform.ticket.domain.QTicketReply.ticketReply;
+import static com.system.Flatform.goods.domain.QTicket.ticket;
+import static com.system.Flatform.goods.domain.QTicketReply.ticketReply;
 
 @Repository
 @RequiredArgsConstructor
-public class TicketRepositoryImpl implements TicketRepositoryCustom {
+public class GoodsRepositoryImpl implements GoodsRepositoryCustom {
 
     private final JPAQueryFactory queryFactory;
 
@@ -54,9 +54,9 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address) {
+    public Page<GoodsListDTO> ticketList(Pageable pageable, String ticketName, String address) {
 
-        List<TicketListDTO> ticketDTOS = queryFactory.select(Projections.constructor(TicketListDTO.class,
+        List<GoodsListDTO> ticketDTOS = queryFactory.select(Projections.constructor(GoodsListDTO.class,
                         ticket.ticketId,
                         ticket.ticketName,
                         ticket.address,
@@ -100,7 +100,7 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
                         ticket.ticketId.eq(ticketId))
                 .fetchOne();
 
-        List<TicketReplyDetailDTO> replyDTOList = queryFactory.select(Projections.constructor(TicketReplyDetailDTO.class,
+        List<GoodsReplyDetailDTO> replyDTOList = queryFactory.select(Projections.constructor(GoodsReplyDetailDTO.class,
                         ticketReply.ticketReplyId,
                         ticketReply.content,
                         ticketReply.replyDepth,

@@ -1,4 +1,4 @@
-package com.system.Flatform.ticket.dto;
+package com.system.Flatform.goods.dto;
 
 import lombok.Getter;
 

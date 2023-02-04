@@ -16,7 +16,7 @@ public record UserRequestDTO (
         return User.builder()
                 .userEmail(userEmail)
                 .password(PasswordUtil.hashPassword(password))
-                .username(username)
+                .userName(username)
                 .userPhone(userPhone)
                 .roles(roles)
                 .build();

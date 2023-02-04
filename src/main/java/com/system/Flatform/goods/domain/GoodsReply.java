@@ -1,6 +1,6 @@
-package com.system.Flatform.ticket.domain;
+package com.system.Flatform.goods.domain;
 
-import com.system.Flatform.ticket.dto.GoodsReplyUpdateDTO;
+import com.system.Flatform.goods.dto.GoodsReplyUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -11,19 +11,19 @@ import org.hibernate.annotations.DynamicUpdate;
 import javax.persistence.*;
 
 /**
- * 공연 티켓 답글 도메인
+ * 공연 답글 도메인
  */
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @DynamicUpdate
 @Entity
-@Table(name = "ticket_reply")
-public class TicketReply extends BaseEntity {
+@Table(name = "goods_reply")
+public class GoodsReply extends BaseEntity {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ticket_reply_id")
-    private Long ticketReplyId;
+    @Column(name = "goods_reply_id")
+    private Long goodsReplyId;
 
     @Column(name = "content", columnDefinition = "VARCHAR(255) COMMENT '답글 내용'")
     private String content;
@@ -34,29 +34,30 @@ public class TicketReply extends BaseEntity {
     @Column(name = "reply_parent_id")
     private Long replyParentId;
 
-    @ManyToOne(targetEntity = Ticket.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "ticket_id")
-    private Ticket ticket;
+    @ManyToOne(targetEntity = Goods.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "goods_id")
+    private Goods goods;
+
+    @Builder
+    public GoodsReply(String content, int replyDepth, Long replyParentId, Goods goods) {
+        this.content = content;
+        this.replyDepth = replyDepth;
+        this.replyParentId = replyParentId;
+        this.goods = goods;
+    }
 
     public void setReplyParentId(Long replyParentId) {
         this.replyParentId = replyParentId;
     }
 
-    public void setTicket(Ticket ticket) {
-        this.ticket = ticket;
-        ticket.getTicketReplyList().add(this);
+    public void setGoods(Goods goods) {
+        this.goods = goods;
+        goods.getGoodsReplyList().add(this);
     }
 
     public void updateReplyContent(GoodsReplyUpdateDTO goodsReplyUpdateDTO) {
         this.content = goodsReplyUpdateDTO.getContent();
     }
 
-    @Builder
-    public TicketReply(Long ticketReplyId, String content, int replyDepth, Long replyParentId, Ticket ticket) {
-        this.ticketReplyId = ticketReplyId;
-        this.content = content;
-        this.replyDepth = replyDepth;
-        this.replyParentId = replyParentId;
-        this.ticket = ticket;
-    }
+
 }

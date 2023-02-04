@@ -1,4 +1,4 @@
-package com.system.Flatform.ticket.dto;
+package com.system.Flatform.goods.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import com.system.Flatform.utils.enums.AgeToWatch;
@@ -23,9 +23,9 @@ public class GoodsDetailDTO {
     private AgeToWatch ageToWatch;
     private String ticketInformation;
 
-    private List<TicketReplyDetailDTO> ticketReplyList;
+    private List<GoodsReplyDetailDTO> ticketReplyList;
 
-    public void setTicketReplyList(List<TicketReplyDetailDTO> ticketReplyList) {
+    public void setTicketReplyList(List<GoodsReplyDetailDTO> ticketReplyList) {
         this.ticketReplyList = ticketReplyList;
     }
 

@@ -1,4 +1,4 @@
-package com.system.Flatform.ticket.dto;
+package com.system.Flatform.goods.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.Getter;
  * 티켓 상세 목록 DTO
  */
 @Getter
-public class TicketListDTO {
+public class GoodsListDTO {
 
     private Long ticketId;
     private String ticketName;
@@ -15,7 +15,7 @@ public class TicketListDTO {
     private String period;
 
     @QueryProjection
-    public TicketListDTO(Long ticketId, String ticketName, String address, String period) {
+    public GoodsListDTO(Long ticketId, String ticketName, String address, String period) {
         this.ticketId = ticketId;
         this.ticketName = ticketName;
         this.address = address;

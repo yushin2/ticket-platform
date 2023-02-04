@@ -1,11 +1,11 @@
 package com.system.Flatform.api;
 
 
-import com.system.Flatform.ticket.dto.GoodsCreateDTO;
-import com.system.Flatform.ticket.dto.GoodsReplyCreateDTO;
-import com.system.Flatform.ticket.dto.GoodsReplyUpdateDTO;
-import com.system.Flatform.ticket.dto.GoodsUpdateDTO;
-import com.system.Flatform.ticket.service.TicketService;
+import com.system.Flatform.goods.record.GoodsCreateDTO;
+import com.system.Flatform.goods.dto.GoodsReplyCreateDTO;
+import com.system.Flatform.goods.dto.GoodsReplyUpdateDTO;
+import com.system.Flatform.goods.record.GoodsUpdateDTO;
+import com.system.Flatform.goods.service.GoodsService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.apache.logging.log4j.Level;
@@ -26,7 +26,7 @@ import static com.system.Flatform.utils.Constants.*;
 public class GoodsAPI {
 
     final static Logger logger = LogManager.getLogger(GoodsAPI.class);
-    private final TicketService ticketService;
+    private final GoodsService goodsService;
 
     /**
      * 공연 등록(저장) API
@@ -35,7 +35,7 @@ public class GoodsAPI {
      */
     @PostMapping
     public ResponseEntity createGoods(@RequestBody GoodsCreateDTO goodsCreateDTO) {
-        ticketService.createGoods(goodsCreateDTO);
+        goodsService.createGoods(goodsCreateDTO);
         logger.log(Level.ALL, ">>>> log test");
         log.fatal(">>> test fatal");
         log.error(">>> test error");
@@ -53,7 +53,7 @@ public class GoodsAPI {
      */
     @PutMapping
     public ResponseEntity updateGoods(@RequestBody GoodsUpdateDTO goodsUpdateDTO) {
-        ticketService.updateGoods(goodsUpdateDTO);
+        goodsService.updateGoods(goodsUpdateDTO);
         return ResponseEntity.ok().body(UPDATE_SUCCESS);
     }
 
@@ -64,7 +64,7 @@ public class GoodsAPI {
      */
     @DeleteMapping("/{goodsIds}")
     public ResponseEntity deleteGoods(@PathVariable("goodsIds") List<Long> goodsIds) {
-        ticketService.deleteGoods(goodsIds);
+        goodsService.deleteGoods(goodsIds);
         return ResponseEntity.ok().body(DELETE_SUCCESS);
     }
 
@@ -77,7 +77,7 @@ public class GoodsAPI {
     public ResponseEntity goodsList(Pageable pageable,
                                     @RequestParam(required = false, defaultValue = "") String goodsName,
                                     @RequestParam(required = false, defaultValue = "") String address) {
-        return ResponseEntity.ok().body(ticketService.goodsList(pageable, goodsName, address));
+        return ResponseEntity.ok().body(goodsService.goodsList(pageable, goodsName, address));
     }
 
     /**
@@ -87,7 +87,7 @@ public class GoodsAPI {
      */
     @GetMapping("/{ticketId}")
     public ResponseEntity goodsDetail(@PathVariable("goodsId") Long goodsId) {
-        return ResponseEntity.ok().body(ticketService.goodsDetail(goodsId));
+        return ResponseEntity.ok().body(goodsService.goodsDetail(goodsId));
     }
 
     /**
@@ -97,7 +97,7 @@ public class GoodsAPI {
      */
     @PostMapping("/reply")
     public ResponseEntity createGoodsReply(@RequestBody GoodsReplyCreateDTO goodsReplyCreateDTO) {
-        ticketService.createGoodsReply(goodsReplyCreateDTO);
+        goodsService.createGoodsReply(goodsReplyCreateDTO);
         return ResponseEntity.ok().body(CREATE_REPLY_SUCCESS);
     }
 
@@ -108,7 +108,7 @@ public class GoodsAPI {
      */
     @PutMapping("/reply")
     public ResponseEntity updateGoodsReply(@RequestBody GoodsReplyUpdateDTO goodsReplyUpdateDTO) {
-        ticketService.updateGoodsReply(goodsReplyUpdateDTO);
+        goodsService.updateGoodsReply(goodsReplyUpdateDTO);
         return ResponseEntity.ok().body(UPDATE_SUCCESS);
     }
 
@@ -119,7 +119,7 @@ public class GoodsAPI {
      */
     @DeleteMapping("/reply/{goodsReplyIds}")
     public ResponseEntity deleteGoodsReply(@PathVariable("goodsReplyIds") List<Long> goodsReplyIds) {
-        ticketService.deleteGoodsReply(goodsReplyIds);
+        goodsService.deleteGoodsReply(goodsReplyIds);
         return ResponseEntity.ok().body(DELETE_SUCCESS);
     }
 }
