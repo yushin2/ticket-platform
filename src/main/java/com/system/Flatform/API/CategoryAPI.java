@@ -1,7 +1,7 @@
 package com.system.Flatform.API;
 
-import com.system.Flatform.category.dto.CategorySaveDTO;
-import com.system.Flatform.category.dto.CategoryUpdateDTO;
+import com.system.Flatform.category.record.CategorySaveRecord;
+import com.system.Flatform.category.record.CategoryUpdateRecord;
 import com.system.Flatform.category.service.CategoryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +17,14 @@ public class CategoryAPI {
     private final CategoryService categoryService;
 
     @PostMapping
-    public ResponseEntity saveCategory(@RequestBody CategorySaveDTO categorySaveDTO) {
-        categoryService.saveCategory(categorySaveDTO);
+    public ResponseEntity saveCategory(@RequestBody CategorySaveRecord categorySaveRecord) {
+        categoryService.saveCategory(categorySaveRecord);
         return ResponseEntity.ok().body(CREATE_SUCCESS);
     }
 
     @PutMapping
-    public ResponseEntity updateCategory(@RequestBody CategoryUpdateDTO categoryUpdateDTO) {
-        categoryService.updateCategory(categoryUpdateDTO);
+    public ResponseEntity updateCategory(@RequestBody CategoryUpdateRecord categoryUpdateRecord) {
+        categoryService.updateCategory(categoryUpdateRecord);
         return ResponseEntity.ok().body(UPDATE_SUCCESS);
     }
 
