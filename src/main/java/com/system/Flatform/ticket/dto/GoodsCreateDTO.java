@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
  * 공연 티켓 등록(저장) DTO
  */
 @Getter
-public class TicketCreateDTO {
+public class GoodsCreateDTO {
 
     private String ticketName;
     private String period;

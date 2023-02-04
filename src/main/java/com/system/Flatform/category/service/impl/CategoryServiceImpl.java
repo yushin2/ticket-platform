@@ -40,7 +40,7 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public void updateCategory(CategoryUpdateRecord categoryUpdateRecord) {
         Category category = categoryRepository.findById(categoryUpdateRecord.categoryId()).orElseThrow(()
-                -> new IllegalArgumentException(Constants.NO_TICKET_INFO_MSG));
+                -> new IllegalArgumentException(Constants.NO_GOODS_INFO_MSG));
         category.updateCategory(categoryUpdateRecord);
 
     }

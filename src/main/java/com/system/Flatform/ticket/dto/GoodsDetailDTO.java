@@ -11,7 +11,7 @@ import java.util.List;
  * 티켓 상세 조회 DTO
  */
 @Getter
-public class TicketDetailDTO {
+public class GoodsDetailDTO {
 
     private Long ticketId;
     private String ticketName;
@@ -30,7 +30,7 @@ public class TicketDetailDTO {
     }
 
     @QueryProjection
-    public TicketDetailDTO(Long ticketId, String ticketName, String period, String address, int runningTime, String genre, int ticketPrice, AgeToWatch ageToWatch, String ticketInformation) {
+    public GoodsDetailDTO(Long ticketId, String ticketName, String period, String address, int runningTime, String genre, int ticketPrice, AgeToWatch ageToWatch, String ticketInformation) {
         this.ticketId = ticketId;
         this.ticketName = ticketName;
         this.period = period;

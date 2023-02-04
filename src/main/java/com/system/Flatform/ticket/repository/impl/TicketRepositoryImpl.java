@@ -3,7 +3,7 @@ package com.system.Flatform.ticket.repository.impl;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.system.Flatform.ticket.dto.TicketDetailDTO;
+import com.system.Flatform.ticket.dto.GoodsDetailDTO;
 import com.system.Flatform.ticket.dto.TicketListDTO;
 import com.system.Flatform.ticket.dto.TicketReplyDetailDTO;
 import com.system.Flatform.ticket.repository.TicketRepositoryCustom;
@@ -81,9 +81,9 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
      */
     @Transactional(readOnly = true)
     @Override
-    public TicketDetailDTO ticketDetail(Long ticketId) {
+    public GoodsDetailDTO ticketDetail(Long ticketId) {
 
-        TicketDetailDTO ticketDetailDTO = queryFactory.select(Projections.constructor(TicketDetailDTO.class,
+        GoodsDetailDTO goodsDetailDTO = queryFactory.select(Projections.constructor(GoodsDetailDTO.class,
                         ticket.ticketId,
                         ticket.ticketName,
                         ticket.period,
@@ -113,9 +113,9 @@ public class TicketRepositoryImpl implements TicketRepositoryCustom {
                         ticketReply.ticket.ticketId.eq(ticketId))
                 .fetch();
 
-        ticketDetailDTO.setTicketReplyList(replyDTOList);
+        goodsDetailDTO.setTicketReplyList(replyDTOList);
 
-        return ticketDetailDTO;
+        return goodsDetailDTO;
     }
 
 

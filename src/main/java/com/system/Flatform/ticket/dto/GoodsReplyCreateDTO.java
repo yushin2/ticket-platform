@@ -8,7 +8,7 @@ import lombok.Getter;
  * 공연 티켓 답글 등록(저장) DTO
  */
 @Getter
-public class TicketReplyCreateDTO {
+public class GoodsReplyCreateDTO {
 
     private Long ticketId;
     private String content;

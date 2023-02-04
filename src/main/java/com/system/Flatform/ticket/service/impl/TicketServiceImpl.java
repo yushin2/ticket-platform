@@ -11,7 +11,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -27,24 +26,24 @@ public class TicketServiceImpl implements TicketService {
 
     /**
      * 티켓 등록(저장)
-     * @param ticketCreateDTO
+     * @param goodsCreateDTO
      */
     @Transactional
     @Override
-    public void createTicket(TicketCreateDTO ticketCreateDTO) {
-        ticketRepository.save(ticketCreateDTO.toEntity());
+    public void createGoods(GoodsCreateDTO goodsCreateDTO) {
+        ticketRepository.save(goodsCreateDTO.toEntity());
     }
 
     /**
      * 티켓 수정
-     * @param ticketUpdateDTO
+     * @param goodsUpdateDTO
      */
     @Transactional
     @Override
-    public void updateTicket(TicketUpdateDTO ticketUpdateDTO) {
-        Ticket ticket = ticketRepository.findById(ticketUpdateDTO.getTicketId()).orElseThrow(()
-                -> new IllegalArgumentException(NO_TICKET_INFO_MSG));
-        ticket.ticketUpdate(ticketUpdateDTO);
+    public void updateGoods(GoodsUpdateDTO goodsUpdateDTO) {
+        Ticket ticket = ticketRepository.findById(goodsUpdateDTO.getTicketId()).orElseThrow(()
+                -> new IllegalArgumentException(NO_GOODS_INFO_MSG));
+        ticket.ticketUpdate(goodsUpdateDTO);
     }
 
     /**
@@ -53,7 +52,7 @@ public class TicketServiceImpl implements TicketService {
      */
     @Transactional
     @Override
-    public void deleteTicket(List<Long> ticketIds) {
+    public void deleteGoods(List<Long> ticketIds) {
         ticketRepository.deleteTickets(ticketIds);
     }
 
@@ -64,7 +63,7 @@ public class TicketServiceImpl implements TicketService {
      */
     @Transactional(readOnly = true)
     @Override
-    public Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address) {
+    public Page<TicketListDTO> goodsList(Pageable pageable, String ticketName, String address) {
         return ticketRepository.ticketList(pageable, ticketName, address);
     }
 
@@ -75,20 +74,20 @@ public class TicketServiceImpl implements TicketService {
      */
     @Transactional(readOnly = true)
     @Override
-    public TicketDetailDTO ticketDetail(Long ticketId) {
+    public GoodsDetailDTO goodsDetail(Long ticketId) {
         return ticketRepository.ticketDetail(ticketId);
     }
 
     /**
      * 티켓 답글 등록(저장)
-     * @param ticketReplyCreateDTO
+     * @param goodsReplyCreateDTO
      */
     @Transactional
     @Override
-    public void createTicketReply(TicketReplyCreateDTO ticketReplyCreateDTO) {
-        Ticket ticket = ticketRepository.findById(ticketReplyCreateDTO.getTicketId()).orElseThrow(()
-                -> new IllegalArgumentException(NO_TICKET_INFO_MSG));
-        TicketReply savedTicketReply = ticketReplyRepository.save(ticketReplyCreateDTO.toEntity(ticket));
+    public void createGoodsReply(GoodsReplyCreateDTO goodsReplyCreateDTO) {
+        Ticket ticket = ticketRepository.findById(goodsReplyCreateDTO.getTicketId()).orElseThrow(()
+                -> new IllegalArgumentException(NO_GOODS_INFO_MSG));
+        TicketReply savedTicketReply = ticketReplyRepository.save(goodsReplyCreateDTO.toEntity(ticket));
         savedTicketReply.setReplyParentId((ticket.getTicketReplyList().size() == 0) ?
                 savedTicketReply.getTicketReplyId() :
                 ticket.getTicketReplyList().get(ticket.getTicketReplyList().size()-1).getTicketReplyId());
@@ -96,14 +95,14 @@ public class TicketServiceImpl implements TicketService {
 
     /**
      * 티켓 답글 수정
-     * @param ticketReplyUpdateDTO
+     * @param goodsReplyUpdateDTO
      */
     @Transactional
     @Override
-    public void updateTicketReply(TicketReplyUpdateDTO ticketReplyUpdateDTO) {
-        TicketReply ticketReply = ticketReplyRepository.findById(ticketReplyUpdateDTO.getTicketReplyId()).orElseThrow(()
-                -> new IllegalArgumentException(NO_TICKET_REPLY_MSG));
-        ticketReply.updateReplyContent(ticketReplyUpdateDTO);
+    public void updateGoodsReply(GoodsReplyUpdateDTO goodsReplyUpdateDTO) {
+        TicketReply ticketReply = ticketReplyRepository.findById(goodsReplyUpdateDTO.getTicketReplyId()).orElseThrow(()
+                -> new IllegalArgumentException(NO_GOODS_REPLY_MSG));
+        ticketReply.updateReplyContent(goodsReplyUpdateDTO);
     }
 
     /**
@@ -112,7 +111,7 @@ public class TicketServiceImpl implements TicketService {
      */
     @Transactional
     @Override
-    public void deleteTicketReply(List<Long> ticketReplyIds) {
+    public void deleteGoodsReply(List<Long> ticketReplyIds) {
         ticketReplyRepository.deleteTicketReply(ticketReplyIds);
     }
 

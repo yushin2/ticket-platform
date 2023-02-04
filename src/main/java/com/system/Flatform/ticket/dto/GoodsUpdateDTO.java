@@ -7,7 +7,7 @@ import lombok.Getter;
 import java.time.LocalDateTime;
 
 @Getter
-public class TicketUpdateDTO {
+public class GoodsUpdateDTO {
 
     private Long ticketId;
     private String ticketName;

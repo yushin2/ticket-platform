@@ -1,6 +1,6 @@
 package com.system.Flatform.ticket.domain;
 
-import com.system.Flatform.ticket.dto.TicketReplyUpdateDTO;
+import com.system.Flatform.ticket.dto.GoodsReplyUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -47,8 +47,8 @@ public class TicketReply extends BaseEntity {
         ticket.getTicketReplyList().add(this);
     }
 
-    public void updateReplyContent(TicketReplyUpdateDTO ticketReplyUpdateDTO) {
-        this.content = ticketReplyUpdateDTO.getContent();
+    public void updateReplyContent(GoodsReplyUpdateDTO goodsReplyUpdateDTO) {
+        this.content = goodsReplyUpdateDTO.getContent();
     }
 
     @Builder

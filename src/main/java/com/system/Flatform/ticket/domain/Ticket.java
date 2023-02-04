@@ -1,10 +1,9 @@
 package com.system.Flatform.ticket.domain;
 
-import com.system.Flatform.ticket.dto.TicketUpdateDTO;
+import com.system.Flatform.ticket.dto.GoodsUpdateDTO;
 import com.system.Flatform.utils.BaseEntity;
 import com.system.Flatform.utils.enums.AgeToWatch;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.DynamicUpdate;
@@ -64,7 +63,7 @@ public class Ticket extends BaseEntity {
     }
 
 
-    public void ticketUpdate(TicketUpdateDTO ticketUpdateDTO) {
+    public void ticketUpdate(GoodsUpdateDTO goodsUpdateDTO) {
 //        this.ticketName = ticketUpdateDTO.getTicketName();
 //        this.period = ticketUpdateDTO.getPeriod();
 //        this.address = ticketUpdateDTO.getAddress();

@@ -1,6 +1,6 @@
 package com.system.Flatform.ticket.repository;
 
-import com.system.Flatform.ticket.dto.TicketDetailDTO;
+import com.system.Flatform.ticket.dto.GoodsDetailDTO;
 import com.system.Flatform.ticket.dto.TicketListDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +13,6 @@ public interface TicketRepositoryCustom {
 
     Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address);
 
-    TicketDetailDTO ticketDetail(Long ticketId);
+    GoodsDetailDTO ticketDetail(Long ticketId);
 
 }

@@ -8,22 +8,22 @@ import java.util.List;
 
 public interface TicketService {
 
-    /** 이하 티켓 API */
-    void createTicket(TicketCreateDTO ticketCreateDTO);
+    /** 이하 공연 API */
+    void createGoods(GoodsCreateDTO goodsCreateDTO);
 
-    void updateTicket(TicketUpdateDTO ticketUpdateDTO);
+    void updateGoods(GoodsUpdateDTO goodsUpdateDTO);
 
-    void deleteTicket(List<Long> ticketIds);
+    void deleteGoods(List<Long> ticketIds);
 
-    Page<TicketListDTO> ticketList(Pageable pageable, String ticketName, String address);
+    Page<TicketListDTO> goodsList(Pageable pageable, String ticketName, String address);
 
-    TicketDetailDTO ticketDetail(Long ticketId);
+    GoodsDetailDTO goodsDetail(Long ticketId);
 
-    /** 이하 티켓 답글 API */
-    void createTicketReply(TicketReplyCreateDTO ticketReplyCreateDTO);
+    /** 이하 공연 답글 API */
+    void createGoodsReply(GoodsReplyCreateDTO goodsReplyCreateDTO);
 
-    void updateTicketReply(TicketReplyUpdateDTO ticketReplyUpdateDTO);
+    void updateGoodsReply(GoodsReplyUpdateDTO goodsReplyUpdateDTO);
 
-    void deleteTicketReply(List<Long> ticketReplyIds);
+    void deleteGoodsReply(List<Long> ticketReplyIds);
 
 }
