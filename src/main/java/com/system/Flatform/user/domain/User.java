@@ -1,7 +1,6 @@
 package com.system.Flatform.user.domain;
 
 import com.system.Flatform.utils.BaseEntity;
-import com.system.Flatform.utils.enums.AgeToWatch;
 import com.system.Flatform.utils.enums.Gender;
 import lombok.AccessLevel;
 import lombok.Builder;
