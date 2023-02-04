@@ -1,4 +1,4 @@
-package com.system.Flatform.utils.config;
+package com.system.Flatform.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

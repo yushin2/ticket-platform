@@ -1,4 +1,4 @@
-package com.system.Flatform.utils.security;
+package com.system.Flatform.security;
 
 import com.system.Flatform.user.domain.User;
 import com.system.Flatform.user.repository.UserRepository;
